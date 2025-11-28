@@ -60,10 +60,11 @@ body{
     inset:auto;
     width:100%;
     height:100%;
+    max-width:100%;
     min-height:0;
-    margin:16px 0 16px 0;
+    margin:0;              /* no extra margins inside the phone */
     background:var(--white);
-    border-radius:16px;
+    border-radius:0;       /* the phone itself provides rounding */
     box-shadow:none;
     overflow:auto;
 }
