@@ -6,14 +6,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <title>Account</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 </head>
 <body>
 <div class="mock-phone-wrap">
   <div class="mock-phone" role="img" aria-label="Phone mockup">
     <div class="status" aria-hidden="true">
-      <div class="left"><div class="time">9:30</div></div>
+      <div class="left">
+        <div class="time">9:30</div>
+      </div>
       <div class="icons">
         <span class="material-symbols-outlined">signal_cellular_2_bar</span>
         <span class="material-symbols-outlined">network_wifi</span>
@@ -29,10 +30,10 @@
       <div class="app" role="application" aria-label="Account screen">
         <div class="top">
           <img src="../images/3d_avatar.svg" alt="User avatar" class="avatar-img" width="48" height="48">
-          <button class="chip-btn-primary">Earn 90 €</button>
           <div class="top-right">
+            <button class="chip-btn-primary">Earn 90 €</button>
             <button class="chip-btn-outline">Travel Mode</button>
-            <button class="icon-button" aria-hidden="true">
+            <button class="icon-button" aria-label="Notifications">
               <img src="../images/notification_bell.svg" alt="" width="18" height="18">
             </button>
           </div>
@@ -47,9 +48,9 @@
             <button class="chip-btn-dark">Request</button>
           </div>
 
-          <div class="cards" aria-hidden="false">
+          <div class="cards" aria-label="Currency accounts">
             <div class="card">
-                <img src="../images/Europe.png" alt="Europe" class="flag-img" width="48" height="48">
+              <img src="../images/Europe.png" alt="Europe" class="flag-img" width="48" height="48">
               <div>
                 <div class="amount">0.00</div>
                 <div class="currency">EUR</div>
@@ -57,8 +58,7 @@
             </div>
 
             <div class="card">
-                <img src="../images/United%20States.png" alt="User avatar" class="avatar-img" width="48" height="48">
-
+              <img src="../images/United%20States.png" alt="United States" class="flag-img" width="48" height="48">
               <div>
                 <div class="amount">0.00</div>
                 <div class="currency">USD</div>
@@ -96,8 +96,8 @@
           </div>
         </div>
 
-        <div class="bottom-nav" aria-hidden="false">
-          <nav class="nav" role="navigation" aria-label="Bottom navigation">
+        <div class="bottom-nav" aria-label="Bottom navigation">
+          <nav class="nav" role="navigation">
             <div class="nav-item">
               <span class="material-symbols-outlined">home</span>
               <div>Home</div>
