@@ -1,37 +1,32 @@
 # Project Wise Hackathon Utilities
 
-This repository contains a lightweight Python utility to jump-start hackathon work. It offers quick commands for greeting teammates, sharing tips, and generating a starter checklist.
+This repository contains a lightweight Python utility to jump-start hackathon work.
+It includes a minimal Flask app to preview the travel UI mockups and a small Python
+module with travel-mode helpers and a CLI demo.
 
 ## Requirements
 
 - Python 3.10+
+- [Flask](https://flask.palletsprojects.com/) (for the UI preview)
 
-## Usage
+## Flask UI preview
 
-Run commands from the project root:
+The HTML, CSS, and image assets live in the `Frontend/` directory. The Flask app is
+configured to serve templates and static files directly from that folder.
 
-- Print a greeting:
+```bash
+python APP.py
+```
 
-  ```bash
-  python main.py greet "Your Name"
-  ```
+Then open http://127.0.0.1:5000/ in your browser to view the splash screen mock.
 
-- Show quick tips:
+## CLI demo
 
-  ```bash
-  python main.py tips
-  ```
+The CLI walks through activating travel mode, fetching FX data, listing insights, and
+printing spending summaries for a demo user. Run it from the project root:
 
-- Generate a checklist (uses defaults unless custom items are provided):
+```bash
+python demo.py
+```
 
-  ```bash
-  python main.py checklist notes/checklist.md --project-name "Demo App"
-  ```
-
-- Provide custom checklist items:
-
-  ```bash
-  python main.py checklist notes/custom.md --items "Set up CI" "Prepare slides"
-  ```
-
-The checklist command will create parent directories as needed and write a timestamped header.
+Enter a country code (e.g., `HU` or `TR`) when prompted to see the demo output.
