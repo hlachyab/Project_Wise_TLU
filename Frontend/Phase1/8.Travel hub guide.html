@@ -235,18 +235,5 @@
       <div class="handle" aria-hidden="true"></div>
     </div>
   </div>
-
-<script>
-  // simple toggle behavior for the switch
-  const sw = document.getElementById('switch');
-  sw.addEventListener('click', ()=> {
-    sw.classList.toggle('on');
-    const on = sw.classList.contains('on');
-    sw.setAttribute('aria-checked', String(on));
-  });
-  sw.addEventListener('keydown', (e)=>{
-    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sw.click(); }
-  });
-</script>
 </body>
 </html>
