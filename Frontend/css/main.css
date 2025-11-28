@@ -23,6 +23,7 @@ body{
     -moz-osx-font-smoothing:grayscale;
     /* remove centering that produced the inset framing */
     display:block;
+    font-size: 14px;
 }
 /* Make the app cover the full viewport and remove rounded border/shadow */
 .app{
@@ -136,4 +137,39 @@ body{
 .small-note{font-size:12px;color:var(--sub)}
 @media(min-width:520px){
     .app{width:420px}
+}
+
+.v0_30 {
+    width: 412px;
+    height: 892px;
+    background: rgba(255,255,255,1);
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    overflow: hidden;
+}
+
+.name {
+    color: #fff;
+}
+.name {
+    color: #fff;
+}
+.v0_33 {
+    width: 412px;
+    height: 812px;
+    background: rgba(159,232,112,1);
+    opacity: 1;
+    position: absolute;
+    top: 52px;
+    left: 0px;
+    overflow: hidden;
+}
+.name {
+    color: #fff;
 }
