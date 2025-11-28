@@ -31,12 +31,30 @@
   .amount{font-weight:800}
   .card-tip{background:#e9efe8;border-radius:12px;padding:14px;display:flex;gap:12px;align-items:center;margin:18px 0}
   .card-tip img{width:56px;height:56px;border-radius:10px;object-fit:cover}
-  .bottom-actions{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;width:92%;max-width:420px;padding:12px;display:flex;gap:12px;align-items:center;justify-content:space-between}
-  .btn{flex:1;padding:12px 14px;border-radius:28px;text-align:center;font-weight:700;border:0;cursor:pointer}
+.bottom-actions {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  transform: none;
+
+  background: var(--bg);
+  padding: 12px 18px;
+
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #e5e5e5;
+}
+
+  .btn{flex:1;padding:12px 14px;border-radius:28px;text-align:
+          center;font-weight:700;border:0;cursor:pointer}
   .btn.ghost{background:var(--accent);color:#fff}
-  .btn.green{background:linear-gradient(90deg,#b9f17a,#9de156);color:#042400}
+  .btn.green{background:linear-gradient(90deg,#b9f17a,#9de156)
+  ;color:#042400}
   .right{color:#000;font-weight:800;white-space:nowrap}
-  .small-add{color:#6ac463;font-weight:700;font-size:13px;float:right;margin-top:-6px}
+  .small-add{color:#6ac463;font-weight:700;font-size:13px;
+      float:right;margin-top:-6px}
 </style>
 </head>
 <body>
@@ -96,22 +114,27 @@
               <div class="right">240.00 EUR</div>
             </div>
           </div>
+            <div class="bottom-actions">
+  <button class="btn ghost">See summary</button>
+  <button class="btn green">Edit trip details</button>
+</div>
           <div class="card-tip" style="margin-top:20px">
             <img src="https://via.placeholder.com/56" alt="" />
             <div>
               <div style="font-weight:700">Currency tips and<br/>Spending guide</div>
-              <div style="margin-top:8px;color:#2d8b27;font-weight:700">Enable</div>
+              <div style="margin-top:8px;color:#318d30;font-weight:700">Enable</div>
             </div>
           </div>
         </div>
       </div>
+
+
     </main>
     <div class="gesture" aria-hidden="true"></div>
+  <button class="btn green">Edit trip details</button>
+
   </div>
 </div>
-<div class="bottom-actions">
-  <button class="btn ghost">See summary</button>
-  <button class="btn green">Edit trip details</button>
-</div>
+
 </body>
 </html>

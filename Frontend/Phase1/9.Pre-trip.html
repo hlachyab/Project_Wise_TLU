@@ -81,9 +81,23 @@ html,body{height:100%;margin:0;background:var(--bg);color:#111}
 
 /* Highlighted item style */
 .item.highlight{
-  background:linear-gradient(180deg,var(--accent),#aef07a);
-  color:#0b3b0b;
-  box-shadow:0 6px 18px rgba(127,214,92,0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    min-height: 32px;
+    border-radius: 99px;                 /* full pill */
+    border: none;
+    cursor: pointer;
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    font-family: inherit;
+
+    background: #aefc89;                  /* light green fill */
+    color: #163300;                       /* dark green text */
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.02);
 }
 .item.highlight .avatar{background:transparent}
 .item .icon{
@@ -130,43 +144,50 @@ html,body{height:100%;margin:0;background:var(--bg);color:#111}
               <div class="avatar" style="background-image:url('https://via.placeholder.com/88/4caf50/ffffff?text=S')" aria-hidden="true"></div>
               <div class="meta">
                 <div class="name">Sarah Davies</div>
-                <div class="status">Paid · Today</div>
               </div>
             </div>
             <div class="right">
               <div class="amount">50.00 EUR</div>
-              <div class="thumb" aria-hidden="true">📎</div>
             </div>
           </article>
           <article class="item" role="listitem">
             <div class="left">
-              <div class="avatar" style="background-image:url('https://via.placeholder.com/88/bbbbbb/ffffff?text=+')" aria-hidden="true"></div>
-              <div class="meta">
+<a href="images/plus.jpg" target="_blank">
+  <div class="avatar"
+       style="width:48px; height:48px; border-radius:50%; background-image:url('images/plus.jpg'); background-size:cover; background-position:center;">
+  </div>
+</a>
+                <div class="meta">
                 <div class="name">Sarah Davies</div>
-                <div class="status">Paid · Today</div>
               </div>
             </div>
             <div class="right">
               <div class="amount">50.00 EUR</div>
-              <div class="thumb" aria-hidden="true">—</div>
             </div>
           </article>
           <article class="item highlight" role="listitem">
             <div class="left">
-              <div class="avatar" style="background-image:url('https://via.placeholder.com/88/4caf50/ffffff?text=📅')" aria-hidden="true"></div>
+          <a href="images/plus.jpg" target="_blank">
+  <div class="avatar"
+       style="width:48px; height:48px; border-radius:50%; background-image:url('images/plus.jpg'); background-size:cover; background-position:center;">
+  </div>
+</a>
               <div class="meta">
                 <div class="name">Sarah Davies</div>
-                <div class="status">Paid · Today</div>
               </div>
             </div>
             <div class="right">
               <div class="amount">50.00 EUR</div>
-              <div class="thumb" aria-hidden="true">📷</div>
             </div>
           </article>
           <article class="item">
             <div class="left">
-              <div class="avatar" style="background-image:url('https://via.placeholder.com/88/cccccc/333333?text=SD')" aria-hidden="true"></div>
+                <a href="images/plus.jpg" target="_blank">
+  <div class="avatar"
+       style="width:48px; height:48px; border-radius:50%; background-image:url('images/plus.jpg'); background-size:cover; background-position:center;">
+  </div>
+</a>
+
               <div class="meta">
                 <div class="name">Sarah Davies</div>
                 <div class="status">Paid · Today</div>
@@ -174,12 +195,15 @@ html,body{height:100%;margin:0;background:var(--bg);color:#111}
             </div>
             <div class="right">
               <div class="amount">50.00 EUR</div>
-              <div class="thumb" aria-hidden="true">—</div>
             </div>
           </article>
           <article class="item">
             <div class="left">
-              <div class="avatar" style="background-image:url('https://via.placeholder.com/88/cccccc/333333?text=SD')" aria-hidden="true"></div>
+                <a href="images/plus.jpg" target="_blank">
+  <div class="avatar"
+       style="width:48px; height:48px; border-radius:50%; background-image:url('images/plus.jpg'); background-size:cover; background-position:center;">
+  </div>
+</a>
               <div class="meta">
                 <div class="name">Sarah Davies</div>
                 <div class="status">Paid · Today</div>
@@ -187,7 +211,6 @@ html,body{height:100%;margin:0;background:var(--bg);color:#111}
             </div>
             <div class="right">
               <div class="amount">50.00 EUR</div>
-              <div class="thumb" aria-hidden="true">—</div>
             </div>
           </article>
         </main>
