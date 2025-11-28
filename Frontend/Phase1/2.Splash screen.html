@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mobile Splash Mock</title>
+<style>
+  /* Reset */
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#ececec;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial}
+
+  /* Center the device preview */
+  .wrap{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+
+  /* Phone shell */
+  .phone{
+    width:360px;
+    height:780px;
+    border-radius:24px;
+    background:linear-gradient(180deg,#aefc89 0%,#9fe96a 100%);
+    border:8px solid #cfcfcf;
+    box-shadow:0 12px 30px rgba(0,0,0,0.12);
+    position:relative;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* status bar */
+  .status{
+    position:absolute;
+    top:10px;
+    left:14px;
+    right:14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color:#072a04;
+    font-size:12px;
+    pointer-events:none;
+    z-index:5;
+  }
+  .status .time{font-weight:600}
+  .status .left{display:flex;align-items:center;gap:10px}
+
+  /* top center camera hole */
+  .camera-wrap{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    top:4px;
+    width:36px;
+    height:36px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+  }
+  .camera{width:12px;height:12px;background:#111;border-radius:50%;box-shadow:0 0 0 4px rgba(0,0,0,0.05)}
+
+  /* right icons (simple shapes) */
+  .icons{display:flex;gap:8px;align-items:center}
+  .signal{
+    width:12px;height:10px;
+    transform:rotate(45deg);
+    background:
+      linear-gradient(45deg, transparent 40%, #072a04 40%),
+      linear-gradient(-45deg, #072a04 60%, transparent 60%);
+    clip-path:polygon(0 100%,100% 100%,100% 0);
+    opacity:0.9;
+  }
+  .battery{
+    width:22px;height:12px;border-radius:3px;border:2px solid #072a04;position:relative;
+  }
+  .battery::after{content:"";position:absolute;right:-4px;top:3px;width:3px;height:6px;background:#072a04;border-radius:1px}
+
+  /* main screen area */
+  .screen{
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 20px 46px;
+  }
+
+  /* logo slightly below center */
+  .logo {
+
+}
+  /* bottom gesture bar */
+  .gesture{
+    position:absolute;
+    bottom:14px;
+    left:50%;
+    transform:translateX(-50%);
+    width:84px;
+    height:6px;
+    background:rgba(0,0,0,0.28);
+    border-radius:6px;
+    box-shadow:inset 0 -1px 0 rgba(255,255,255,0.06);
+  }
+
+  /* scale on small screens */
+  @media (max-width:420px){
+    .phone{transform:scale(0.92)}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="phone" role="img" aria-label="Phone mockup">
+      <div class="status" aria-hidden="true">
+        <div class="left"><div class="time">9:30</div></div>
+        <div class="icons">
+          <div class="signal" aria-hidden="true"></div>
+          <div class="battery" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="camera-wrap" aria-hidden="true">
+        <div class="camera"></div>
+      </div>
+
+      <main class="screen" role="main" aria-label="Splash">
+        <div class="logo" aria-hidden="true">
+                <img src="../images/logo2.png" alt="Site Logo">
+
+          <!-- simple stylized logo matching reference -->
+        </div>
+      </main>
+
+      <div class="gesture" aria-hidden="true"></div>
+    </div>
+  </div>
+</body>
+</html>

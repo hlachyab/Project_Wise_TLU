@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pre-trip expenses</title>
+<style>
+/* Styles for a mobile-style expense list with image placeholders */
+:root{
+  --bg:#f7f7f7;
+  --card:#fff;
+  --muted:#7a7a7a;
+  --accent:#bdf59b; /* light green for highlighted rows */
+  --accent-dark:#7fd65c;
+  --pill-border:#cfe9c6;
+  --radius:14px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+html,body{height:100%;margin:0;background:var(--bg);color:#111}
+.container{
+  max-width:420px;margin:18px auto;padding:12px;
+  background:linear-gradient(#fff, #fff);
+  border-radius:18px;box-shadow:0 6px 20px rgba(15,15,15,0.06);
+  border: 6px solid rgba(0,0,0,0.03);
+  min-height:760px;
+}
+
+/* Header */
+.header{
+  display:flex;align-items:center;gap:12px;padding:12px 8px;
+  border-bottom:1px solid #eee;
+}
+.btn-round{width:36px;height:36px;border-radius:50%;background:#f0f0f0;border:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.title{
+  font-weight:700;font-size:18px;flex:1;
+  display:flex;align-items:center;gap:8px;
+}
+.count{background:#eee;padding:4px 8px;border-radius:999px;font-size:13px;color:#333;font-weight:600}
+
+/* Pills filters */
+.pills{display:flex;gap:10px;padding:12px 8px;overflow:auto}
+.pill{
+  padding:8px 12px;border-radius:999px;background:transparent;border:1.5px solid var(--pill-border);
+  white-space:nowrap;font-size:13px;color:#2b5b2b;
+}
+
+/* Section label */
+.section-label{padding:8px 10px;color:var(--muted);font-size:13px}
+
+/* List */
+.list{padding:6px 6px 24px}
+.item{
+  display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:var(--card);
+  margin:8px 4px;align-items:center;justify-content:space-between;
+  transition:transform .12s;
+}
+.item:active{transform:translateY(1px)}
+.left{display:flex;gap:12px;align-items:center;flex:1}
+.avatar{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;background:#eee;display:inline-block;
+  overflow:hidden;display:flex;align-items:center;justify-content:center;
+  font-weight:700;color:#fff;background-size:cover;background-position:center;
+  border:1px solid rgba(0,0,0,0.05)
+}
+.meta{display:flex;flex-direction:column}
+.name{font-weight:700;font-size:15px}
+.status{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* Amount and optional small photo */
+.right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.amount{font-weight:700}
+.thumb{
+  width:44px;height:44px;border-radius:8px;background:#f3f3f3;border:1px solid rgba(0,0,0,0.04);
+  display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);
+}
+
+/* Highlighted item style */
+.item.highlight{
+  background:linear-gradient(180deg,var(--accent),#aef07a);
+  color:#0b3b0b;
+  box-shadow:0 6px 18px rgba(127,214,92,0.12);
+}
+.item.highlight .avatar{background:transparent}
+.item .icon{
+  width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;
+}
+
+/* small screens */
+@media (max-width:420px){
+  .container{margin:8px}
+  .title{font-size:16px}
+  .avatar{width:48px;height:48px}
+  .thumb{width:48px;height:48px}
+}
+</style>
+</head>
+<body>
+<div class="container" role="application" aria-label="Expenses list">
+  <header class="header">
+    <button class="btn-round" aria-label="close">✕</button>
+    <div class="title">Pre-trip expenses <span class="count">(2)</span></div>
+    <div style="width:36px"></div>
+  </header>
+
+  <nav class="pills" aria-label="filters">
+    <div class="pill">Includes hidden</div>
+    <div class="pill">Includes Travel Mode</div>
+    <div class="pill">Type</div>
+  </nav>
+
+  <div class="section-label">Today</div>
+
+  <main class="list">
+    <!-- highlighted item with arrow icon and a placeholder avatar -->
+    <article class="item highlight" role="listitem">
+      <div class="left">
+        <div class="avatar" style="background-image:url('https://via.placeholder.com/88/4caf50/ffffff?text=S')"
+             aria-hidden="true"></div>
+        <div class="meta">
+          <div class="name">Sarah Davies</div>
+          <div class="status">Paid · Today</div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="amount">50.00 EUR</div>
+        <!-- optional receipt thumbnail placeholder -->
+        <div class="thumb" aria-hidden="true">📎</div>
+      </div>
+    </article>
+
+    <!-- normal item with plus icon -->
+    <article class="item" role="listitem">
+      <div class="left">
+        <div class="avatar" style="background-image:url('https://via.placeholder.com/88/bbbbbb/ffffff?text=+')" aria-hidden="true"></div>
+        <div class="meta">
+          <div class="name">Sarah Davies</div>
+          <div class="status">Paid · Today</div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="amount">50.00 EUR</div>
+        <div class="thumb" aria-hidden="true">—</div>
+      </div>
+    </article>
+
+    <!-- highlighted calendar-type item -->
+    <article class="item highlight" role="listitem">
+      <div class="left">
+        <div class="avatar" style="background-image:url('https://via.placeholder.com/88/4caf50/ffffff?text=📅')" aria-hidden="true"></div>
+        <div class="meta">
+          <div class="name">Sarah Davies</div>
+          <div class="status">Paid · Today</div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="amount">50.00 EUR</div>
+        <div class="thumb" aria-hidden="true">📷</div>
+      </div>
+    </article>
+
+    <!-- More list rows with placeholders -->
+    <article class="item">
+      <div class="left">
+        <div class="avatar" style="background-image:url('https://via.placeholder.com/88/cccccc/333333?text=SD')" aria-hidden="true"></div>
+        <div class="meta">
+          <div class="name">Sarah Davies</div>
+          <div class="status">Paid · Today</div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="amount">50.00 EUR</div>
+        <div class="thumb" aria-hidden="true">—</div>
+      </div>
+    </article>
+
+    <article class="item">
+      <div class="left">
+        <div class="avatar" style="background-image:url('https://via.placeholder.com/88/cccccc/333333?text=SD')" aria-hidden="true"></div>
+        <div class="meta">
+          <div class="name">Sarah Davies</div>
+          <div class="status">Paid · Today</div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="amount">50.00 EUR</div>
+        <div class="thumb" aria-hidden="true">—</div>
+      </div>
+    </article>
+
+  </main>
+</div>
+</body>
+</html>

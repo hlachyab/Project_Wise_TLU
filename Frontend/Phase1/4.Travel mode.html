@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Travel Wallets UI</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f6f5;
+  --muted:#6b6f6b;
+  --accent:#385b2f;
+  --pill:#e7e9e6;
+  --card:#ffffff;
+  --chip-border:#d8dfd2;
+  --radius:18px;
+  --gap:16px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:linear-gradient(#eee,#eee);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;color:#0b0b0b}
+.device{
+  width:392px; max-width:96vw; margin:28px auto;
+  border:8px solid #cfcfcf;border-radius:20px;background:var(--card);box-shadow:0 6px 20px rgba(0,0,0,0.06);
+  overflow:hidden;
+  position:relative;
+}
+.app{
+  padding:20px 20px 28px;
+  background:linear-gradient(#fff,#fff);
+  min-height:700px;
+}
+
+/* status row */
+.status{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;
+  color:var(--muted);font-size:13px;
+}
+.status .left{display:flex;gap:8px;align-items:center}
+.pulse{width:10px;height:10px;background:#111;border-radius:50%}
+.status .icons{display:flex;gap:8px;align-items:center}
+
+/* header row */
+.top{
+  display:flex;align-items:flex-start;gap:12px;margin-bottom:8px;
+}
+.back{
+  width:40px;height:40px;border-radius:50%;background:#f1f3f0;border:1px solid #eee;display:grid;place-items:center;
+  box-shadow:0 1px 0 rgba(0,0,0,0.03);
+}
+.title{flex:1}
+h1{margin:0;font-size:26px;line-height:1.05;font-weight:700}
+.subtitle{margin:8px 0 16px;color:var(--muted);font-size:14px;max-width:70%}
+
+/* search pill */
+.search{
+  display:flex;align-items:center;gap:12px;background:var(--pill);padding:12px 16px;border-radius:28px;color:var(--muted);
+  margin-bottom:14px;font-size:14px;border:1px solid #e4e7e3;
+}
+.search input{border:0;background:transparent;outline:0;font-size:14px;width:100%}
+
+/* add wallet row */
+.add-row{display:flex;align-items:center;gap:12px;padding:12px 6px;margin-bottom:14px}
+.add-icon{
+  width:44px;height:44px;border-radius:50%;background:#f1f3f0;border:1px solid #eee;display:grid;place-items:center;
+}
+.add-label{flex:1;font-weight:600;color:#1d1d1d}
+.row-chevron{color:var(--accent);opacity:0.9}
+
+/* chips */
+.chips{display:flex;gap:10px;margin:6px 2px 16px;flex-wrap:wrap}
+.chip{
+  padding:6px 12px;border-radius:999px;border:1px solid var(--chip-border);font-size:13px;color:var(--accent);
+  background:transparent;cursor:pointer
+}
+.chip.active{background:#f2f6ef}
+
+/* list */
+.hr{height:1px;background:#efefef;margin:12px 0}
+.list{display:flex;flex-direction:column;gap:12px}
+.item{display:flex;align-items:center;gap:14px;padding:10px 4px;border-radius:8px}
+.icon{
+  width:52px;height:52px;border-radius:50%;background:#f1f3f0;border:1px solid #eee;display:grid;place-items:center;
+}
+.item-title{font-weight:700;letter-spacing:0.3px}
+.item-sub{font-size:13px;color:var(--muted);margin-top:4px}
+.item-right{margin-left:auto;color:var(--accent);}
+
+/* subtle divider under list for look */
+.bottom-space{height:8px;background:transparent}
+
+/* small screens: keep centered */
+@media (max-width:420px){
+  .device{margin:14px}
+  h1{font-size:22px}
+}
+</style>
+</head>
+<body>
+<div class="device" role="application" aria-label="Travel wallets app preview">
+  <div class="app">
+    <div class="status">
+      <div class="left"><span style="font-weight:600">9:30</span><span class="pulse" aria-hidden="true"></span></div>
+      <div class="icons" aria-hidden="true">
+        <svg width="18" height="12" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M3 12h18" stroke="#6b6f6b" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+
+    <div class="top">
+      <button class="back" aria-label="Go back">
+        <!-- left arrow -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="#2c2c2c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <div class="title">
+        <h1>Going somewhere soon?</h1>
+        <div class="subtitle">Keep all your travel expenses in one place and get real-time insights on the go.</div>
+      </div>
+    </div>
+
+    <label class="search" for="q">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="#8b8f8b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="#8b8f8b" stroke-width="2" /></svg>
+      <input id="q" type="search" placeholder="Search by country or wallet name" aria-label="Search wallets">
+    </label>
+
+    <div class="add-row">
+      <div class="add-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#3b6b34" stroke-width="2.3" stroke-linecap="round"/></svg>
+      </div>
+      <div class="add-label">Add new wallet</div>
+      <div class="row-chevron" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#3b6b34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="chips" role="tablist" aria-label="Year filters">
+      <button class="chip active" role="tab">All</button>
+      <button class="chip" role="tab">2025</button>
+      <button class="chip" role="tab">2024</button>
+      <button class="chip" role="tab">2023</button>
+    </div>
+
+    <div class="hr" role="separator" aria-hidden="true"></div>
+
+    <div class="list" role="list" aria-label="Wallets list">
+      <div class="item" role="listitem" aria-label="Poland 2025">
+        <div class="icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 4v16M6 10l6-6 6 6" stroke="#4b4e4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="item-title">POLAND 2025</div>
+          <div class="item-sub">EUR wallet for trip 10.10–24.10</div>
+        </div>
+        <div class="item-right" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#3b6b34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <div class="item" role="listitem" aria-label="USA 2024">
+        <div class="icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 4v16M6 10l6-6 6 6" stroke="#4b4e4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="item-title">USA 2024</div>
+          <div class="item-sub">USD wallet for trip 24.06–24.07</div>
+        </div>
+        <div class="item-right" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#3b6b34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <div class="item" role="listitem" aria-label="Sweden 2024">
+        <div class="icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 4v16M6 10l6-6 6 6" stroke="#4b4e4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="item-title">SWEDEN 2024</div>
+          <div class="item-sub">SEK wallet for trip 2.02–4.02</div>
+        </div>
+        <div class="item-right" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#3b6b34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <div class="item" role="listitem" aria-label="Latvia 2023">
+        <div class="icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 4v16M6 10l6-6 6 6" stroke="#4b4e4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="item-title">LATVIA 2023</div>
+          <div class="item-sub">EUR wallet for trip 20.05–30.05</div>
+        </div>
+        <div class="item-right" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#3b6b34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-space"></div>
+  </div>
+</div>
+</body>
+</html>
+```
