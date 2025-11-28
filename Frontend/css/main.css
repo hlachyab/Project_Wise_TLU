@@ -34,7 +34,9 @@ body{
     font-size: 14px;
 }
 
-/* Make the app cover the full viewport and remove rounded border/shadow */
+/* Make the app cover the full viewport and remove rounded border/shadow
+   NOTE: this applies to the standalone home_screen.html. When the app is
+   rendered inside a phone mock (`.mock-phone`), we override this below. */
 .app{
     position:fixed;
     inset:0; /* top:0; right:0; bottom:0; left:0 */
@@ -49,6 +51,21 @@ body{
     display:flex;
     flex-direction:column;
     border:0;             /* remove border framing */
+}
+
+/* When the app is shown inside the mock-phone, ensure it fills the phone
+   area with a white background (including behind the top bar area). */
+.mock-phone .screen .app{
+    position:relative;
+    inset:auto;
+    width:100%;
+    height:100%;
+    min-height:0;
+    margin:16px 0 16px 0;
+    background:var(--white);
+    border-radius:16px;
+    box-shadow:none;
+    overflow:auto;
 }
 
 /* top bar */
@@ -281,7 +298,17 @@ body{
 
 /* Migrated styles from index.html (scoped to .mock-phone to avoid class collision with .phone used in other pages) */
 .mock-phone-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:transparent}
-.mock-phone{width:360px;height:780px;border-radius:24px;background:linear-gradient(180deg,#aefc89 0%,#9fe96a 100%);border:8px solid #cfcfcf;box-shadow:0 12px 30px rgba(0,0,0,0.12);position:relative;overflow:hidden;-webkit-font-smoothing:antialiased}
+.mock-phone{
+    width:360px;
+    height:780px;
+    border-radius:24px;
+    background:white; /* neutral frame instead of bright green */
+    border:8px solid #cfcfcf;
+    box-shadow:0 12px 30px rgba(0,0,0,0.12);
+    position:relative;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+}
 .mock-phone .status{position:absolute;top:10px;left:14px;right:14px;display:flex;align-items:center;justify-content:space-between;color:#072a04;font-size:12px;pointer-events:none;z-index:5}
 .mock-phone .status .time{font-weight:600}
 .mock-phone .camera-wrap{position:absolute;left:50%;transform:translateX(-50%);top:4px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;pointer-events:none}
@@ -290,108 +317,6 @@ body{
 .mock-phone .signal{width:12px;height:10px;transform:rotate(45deg);opacity:0.9}
 .mock-phone .battery{width:22px;height:12px;border-radius:3px;border:2px solid #072a04;position:relative}
 .mock-phone .battery::after{content:"";position:absolute;right:-4px;top:3px;width:3px;height:6px;background:#072a04;border-radius:1px}
-.mock-phone .screen{height:100%;display:flex;align-items:center;justify-content:center;padding:32px 20px 46px}
+.mock-phone .screen{height:100%;display:flex;align-items:stretch;justify-content:center;padding:32px 0 46px}
 .mock-phone .gesture{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);width:84px;height:6px;background:rgba(0,0,0,0.28);border-radius:6px;box-shadow:inset 0 -1px 0 rgba(255,255,255,0.06)}
 @media (max-width:420px){.mock-phone{transform:scale(0.92);} }
-
-/* Migrated styles from Travel mode.html (scoped under .device and .device .app to avoid conflicts) */
-.device{width:392px;max-width:96vw;margin:28px auto;border:8px solid #cfcfcf;border-radius:20px;background:var(--card);box-shadow:0 6px 20px rgba(0,0,0,0.06);overflow:hidden;position:relative}
-.device .app{padding:20px 20px 28px;background:linear-gradient(#fff,#fff);min-height:700px}
-.device :root{}
-.device *{box-sizing:border-box}
-.device html, .device body{height:100%}
-.device .status{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;color:var(--muted);font-size:13px}
-.device .status .left{display:flex;gap:8px;align-items:center}
-.device .pulse{width:10px;height:10px;background:#111;border-radius:50%}
-.device .status .icons{display:flex;gap:8px;align-items:center}
-.device .top{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
-.device .back{width:40px;height:40px;border-radius:50%;background:#f1f3f0;border:1px solid #eee;display:grid;place-items:center;box-shadow:0 1px 0 rgba(0,0,0,0.03)}
-.device .title{flex:1}
-.device h1{margin:0;font-size:26px;line-height:1.05;font-weight:700}
-.device .subtitle{margin:8px 0 16px;color:var(--muted);font-size:14px;max-width:70%}
-.device .search{display:flex;align-items:center;gap:12px;background:var(--pill);padding:12px 16px;border-radius:28px;color:var(--muted);margin-bottom:14px;font-size:14px;border:1px solid #e4e7e3}
-.device .search input{border:0;background:transparent;outline:0;font-size:14px;width:100%}
-.device .add-row{display:flex;align-items:center;gap:12px;padding:12px 6px;margin-bottom:14px}
-.device .add-icon{width:44px;height:44px;border-radius:50%;background:#f1f3f0;border:1px solid #eee;display:grid;place-items:center}
-.device .add-label{flex:1;font-weight:600;color:#1d1d1d}
-.device .row-chevron{color:var(--accent);opacity:0.9}
-.device .chips{display:flex;gap:10px;margin:6px 2px 16px;flex-wrap:wrap}
-.device .chip{padding:6px 12px;border-radius:999px;border:1px solid var(--chip-border);font-size:13px;color:var(--accent);background:transparent;cursor:pointer}
-.device .chip.active{background:#f2f6ef}
-.device .hr{height:1px;background:#efefef;margin:12px 0}
-.device .list{display:flex;flex-direction:column;gap:12px}
-.device .item{display:flex;align-items:center;gap:14px;padding:10px 4px;border-radius:8px}
-.device .icon{width:52px;height:52px;border-radius:50%;background:#f1f3f0;border:1px solid #eee;display:grid;place-items:center}
-.device .item-title{font-weight:700;letter-spacing:0.3px}
-.device .item-sub{font-size:13px;color:var(--muted);margin-top:4px}
-.device .item-right{margin-left:auto;color:var(--accent)}
-.device .bottom-space{height:8px;background:transparent}
-@media (max-width:420px){.device{margin:14px}.device h1{font-size:22px}}
-.chip-button-fill, .chip-button-outline{
-    height:32px;                 /* fixed visual height requested */
-    min-height:32px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:0 12px;              /* horizontal padding only */
-    border-radius:16px;          /* rounded pill */
-    font-weight:700;
-    font-size:14px;
-    cursor:pointer;
-    gap:8px;
-}
-
-/* Updated appearance to better match the provided image */
-.chip-button-fill{
-    height:32px;
-    min-height:32px;
-    padding:0 18px;               /* more horizontal breathing room */
-    border-radius:16px;          /* half of height for pill shape */
-    font-weight:600;             /* bolder text like the reference */
-    font-size:15px;              /* slightly larger text */
-    line-height:32px;            /* ensure vertical centering */
-    color:var(--text);           /* dark text */
-    background: linear-gradient(180deg,#bff478 0%, var(--accent) 100%);
-    border:0;
-    box-shadow:0 6px 18px rgba(107,201,106,0.12);
-    display:inline-flex;align-items:center;justify-content:center;
-}
-
-.chip-button-outline{
-    background:transparent;
-    color:var(--text);
-    border:1.5px solid var(--pill-border);
-}
-
-/* Dark variant: originally dark green; make it a light-green pill with dark text to match the provided reference */
-.chip-button-dark{
-    height:32px;
-    min-height:32px;
-    padding:0 20px;               /* wider horizontal padding to match reference */
-    border-radius:16px;          /* pill shape */
-    font-weight:400;
-    font-size:15px;
-    line-height:32px;            /* vertical centering fallback */
-    color: #9FE870;           /* dark text like the reference */
-    background: #163300;
-    border:0;                    /* no visible border */
-    box-shadow:0 6px 18px rgba(107,201,106,0.12);
-    display:inline-flex;align-items:center;justify-content:center;
-    cursor:pointer;
-    transition:transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
-}
-.chip-button-dark:hover{
-    transform:translateY(-1px);
-    box-shadow:0 10px 26px rgba(107,201,106,0.18);
-}
-.chip-button-dark:active{
-    transform:translateY(0);
-    box-shadow:0 4px 12px rgba(107,201,106,0.12);
-}
-.chip-button-dark:focus{
-    outline:3px solid rgba(164,229,90,0.18);
-    outline-offset:2px;
-}
-.chip-button-dark[disabled], .chip-button-dark.disabled{
-    opacity:0.5;pointer-events:none;box-shadow:none;transform:none;
-}

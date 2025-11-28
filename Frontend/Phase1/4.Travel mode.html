@@ -4,19 +4,35 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Travel Wallets UI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet"<link rel="stylesheet" href="../css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 </head>
 <body>
-<div class="device" role="application" aria-label="Travel wallets app preview">
-  <div class="app">
-    <div class="status">
-      <div class="left"><span style="font-weight:600">9:30</span><span class="pulse" aria-hidden="true"></span></div>
-      <div class="icons" aria-hidden="true">
-        <svg width="18" height="12" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M3 12h18" stroke="#6b6f6b" stroke-width="2" stroke-linecap="round"/></svg>
+<div class="mock-phone-wrap">
+  <div class="mock-phone" role="img" aria-label="Phone mockup">
+    <div class="status" aria-hidden="true">
+      <div class="left"><div class="time">9:30</div></div>
+      <div class="icons">
+        <span class="material-symbols-outlined">signal_cellular_2_bar</span>
+        <span class="material-symbols-outlined">network_wifi</span>
+        <span class="material-symbols-outlined">battery_3_bar</span>
       </div>
     </div>
+
+    <div class="camera-wrap" aria-hidden="true">
+      <div class="camera"></div>
+    </div>
+
+    <main class="screen" role="main" aria-label="Travel wallets">
+      <div class="app" role="application" aria-label="Travel wallets app preview" style="padding:16px 16px 0;">
+        <div class="status">
+          <div class="left"><span style="font-weight:600">9:30</span><span class="pulse" aria-hidden="true"></span></div>
+          <div class="icons" aria-hidden="true">
+            <svg width="18" height="12" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M3 12h18" stroke="#6b6f6b" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
 
     <div class="top">
       <button class="back" aria-label="Go back">
@@ -108,7 +124,11 @@
       </div>
     </div>
 
-    <div class="bottom-space"></div>
+        <div class="bottom-space"></div>
+      </div>
+    </main>
+
+    <div class="gesture" aria-hidden="true"></div>
   </div>
 </div>
 </body>
