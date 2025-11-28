@@ -7,6 +7,31 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <style>
+      /* Splash-screen specific styling */
+      .screen--splash {
+        /* override any default .screen layout */
+        display:flex !important;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        height:100%;
+        padding:16px;
+        background:linear-gradient(180deg,#aefc89,#8eea71);
+        box-sizing:border-box;
+      }
+      .screen--splash .logo {
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        width:100%;
+      }
+      .screen--splash .logo img {
+        max-width:70%;
+        height:auto;
+        display:block;
+      }
+    </style>
 </head>
 <body>
   <div class="mock-phone-wrap">
@@ -24,11 +49,9 @@
         <div class="camera"></div>
       </div>
 
-      <main class="screen" role="main" aria-label="Splash" style="padding:16px;">
+      <main class="screen screen--splash" role="main" aria-label="Splash">
         <div class="logo" aria-hidden="true">
-                <img src="../images/logo2.png" alt="Site Logo">
-
-          <!-- simple stylized logo matching reference -->
+          <img src="../images/logo2.png" alt="Site Logo">
         </div>
       </main>
 
