@@ -6,7 +6,6 @@
 
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-</head>
     <title>Travel Wallet — Budget</title>
 <style>
   :root{
@@ -15,6 +14,11 @@
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   }
   html,body{height:100%;margin:0;background:var(--bg);color:var(--primary)}
+
+  /* container that gives 16px horizontal padding to all screen content */
+  .screen-inner{
+    padding:0 16px 16px;
+  }
 
   /* Wallet details inner layout, scoped so it can live inside global .app */
   .wallet-top {
@@ -57,11 +61,16 @@
     box-shadow:0 6px 18px rgba(50,180,50,0.12);cursor:pointer
   }
 
+  /* inline row for currency label + icon */
+  .inline-currency{
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+
 </style>
-
+</head>
 <body>
-
-
 
 <div class="mock-phone-wrap">
   <div class="mock-phone" role="img" aria-label="Phone mockup">
@@ -78,67 +87,56 @@
     </div>
     <main class="screen" role="main" aria-label="New travel wallet setup">
       <div class="app">
-        <header>
-          <button class="back" aria-label="Back">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </header>
+        <div class="screen-inner">
+          <header>
+            <button class="icon-btn" aria-label="Back">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+          </header>
 
-    <h1 id="title">How much do you plan to spend?</h1>
-    <p class="lead">You’ll get gentle reminders if you’re close to this amount.</p>
+          <h1 id="title">How much do you plan to spend?</h1>
+          <p class="lead">You’ll get gentle reminders if you’re close to this amount.</p>
 
-    <section class="section" aria-labelledby="budget-label">
-      <label id="budget-label" class="small">Budget for trip</label>
+          <section class="section" aria-labelledby="budget-label">
+            <label id="budget-label" class="small">Budget for trip</label>
 
-        <label for="country" class="wallet-label">Country</label>
-        <div class="wallet-select">
-          <div class="flag">
-            <img id="countryFlag"
-                 src="../images/jp-japan.svg" alt="JP">
-          </div>
-          <div class="txt">
-            <select id="country" class="native" aria-label="Country">
-              <option value="JP">Japan</option>
-              <option value="FR">France</option>
-              <option value="DE">Germany</option>
-            </select>
-          </div>
-          <div class="chev">&#9662;</div>
+            <label for="country" class="wallet-label">Country</label>
+            <div class="wallet-select">
+                <div class="txt">
+                    <div>1</div>
+                </div>
+                <div class="inline-currency">
+                    <div>EUR</div>
+                    <img id="countryFlag" src="../images/eur-euro-detailed.svg" alt="EUR" style="height:24px;width:auto;display:block;">
+                </div>
+            </div>
+
+            <div class="mutelist" id="breakdown">
+              You have <strong id="balance">17.00 EUR</strong> in your balance.<br>
+              <div style="margin-top:8px;">
+                <div>− 0.01 EUR Our fee</div>
+                <div>= 0.99 EUR Amount we’ll convert</div>
+                <div>× 100.983 Guaranteed rate</div>
+              </div>
+            </div>
+
+            <label for="currency" class="wallet-label">Currency</label>
+              <div class="wallet-select">
+                  <div class="txt">
+                      <div>100</div>
+                  </div>
+                  <div class="inline-currency">
+                      <div>JPY</div>
+                      <img id="countryFlag" src="../images/japan.jpg" alt="EUR" style="height:24px;width:auto;display:block;">
+                      <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                  </div>
+              </div>
+            </div>
+
+            <button class="chip-btn-primary" style="margin-top:18px; margin-left:16px; margin-right:16px">Confirm</button>
+
+          </section>
         </div>
-
-      <div class="mutelist" id="breakdown">
-        You have <strong id="balance">17.00 EUR</strong> in your balance.<br>
-        <div style="margin-top:8px;">
-          <div>− 0.01 EUR Our fee</div>
-          <div>= 0.99 EUR Amount we’ll convert</div>
-          <div>× 100.983 Guaranteed rate</div>
-        </div>
-      </div>
-
-        <label for="currency" class="wallet-label">Currency</label>
-        <div class="wallet-select" aria-hidden="false">
-          <div class="flag">
-            <img id="currencyFlag"
-                 src="../images/eur-euro-detailed.svg" alt="EUR">
-          </div>
-          <div class="txt">
-            <select id="currency" class="native" aria-label="Currency">
-              <option value="EUR">EUR</option>
-              <option value="USD">USD</option>
-              <option value="GBP">GBP</option>
-              <option value="JPY">JPY</option>
-            </select>
-          </div>
-          <div class="chev">&#9662;</div>
-        </div>
-
-
-
- <button class="chip-btn-primary">Request</button>
-
-
-    </section>
-
         <footer></footer>
       </div>
     </main>
