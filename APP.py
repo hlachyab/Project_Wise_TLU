@@ -330,7 +330,7 @@ TRAVEL_GUIDES = {
 @app.route("/")
 def splash():
     # Frontend/index.html = splash / landing
-    return render_template("Splash screen.html")
+    return render_template("1_splash_screen.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -368,7 +368,7 @@ def home_screen():
     travel_state = user.travel_state
 
     return render_template(
-        "Home.html",
+        "2_home.html",
         user=user,
         accounts=accounts,
         travel_state=travel_state,
