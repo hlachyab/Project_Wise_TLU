@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login · Wise Travel</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <style>
+    body { display:flex; align-items:center; justify-content:center; min-height:100vh; background:#eef1f7; }
+    .panel { background:white; padding:32px; border-radius:12px; width:100%; max-width:420px; box-shadow:0 6px 24px rgba(0,0,0,0.08); }
+    h1 { margin-top:0; }
+    label { display:block; margin:12px 0 6px; font-weight:600; }
+    input { width:100%; padding:10px 12px; border-radius:8px; border:1px solid #cbd5e0; font-size:1rem; }
+    .actions { margin-top:18px; display:flex; gap:10px; align-items:center; }
+    button { padding:10px 14px; border:none; border-radius:8px; background:#0e4cd6; color:white; font-weight:700; cursor:pointer; }
+    a { color:#0e4cd6; }
+    .flash { background:#fff7eb; border:1px solid #f3d2a2; color:#92400e; padding:10px 12px; border-radius:8px; margin-bottom:12px; }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h1>Welcome back</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <div class="flash">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="post" action="{{ url_for('login') }}">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" value="demo@wise.com" required>
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" value="demo123" required>
+
+      <div class="actions">
+        <button type="submit">Sign in</button>
+        <a href="{{ url_for('splash') }}">Back</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

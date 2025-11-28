@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ 'Wallet · ' + wallet.name if wallet else 'Create travel wallet' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background:#f5f7fb; margin:0; }
+    header { background:#0e4cd6; color:white; padding:18px; display:flex; justify-content:space-between; align-items:center; }
+    main { max-width:960px; margin:24px auto; padding:0 16px 32px; }
+    .card { background:white; padding:16px; border-radius:10px; box-shadow:0 3px 14px rgba(0,0,0,0.05); margin-bottom:16px; }
+    a.button-link { padding:10px 12px; background:white; border:2px solid #0e4cd6; color:#0e4cd6; border-radius:8px; font-weight:700; text-decoration:none; }
+    label { display:block; font-weight:600; margin-top:10px; }
+    input, select { width:100%; padding:10px 12px; border-radius:8px; border:1px solid #cbd5e0; font-size:1rem; }
+    button { margin-top:12px; padding:10px 14px; border:none; border-radius:8px; background:#0e4cd6; color:white; font-weight:700; cursor:pointer; }
+    .flash { background:#fff7eb; border:1px solid #f3d2a2; color:#92400e; padding:10px 12px; border-radius:8px; margin:12px 0; }
+    .tx { border-bottom:1px solid #e2e8f0; padding:8px 0; }
+    .tx:last-child { border-bottom:none; }
+    .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+    .guide { background:#f0f7ff; padding:12px; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>{{ wallet.name if wallet else 'New travel wallet' }}</div>
+    <div>
+      <a class="button-link" href="{{ url_for('travel_wallets_list') }}">Back to list</a>
+      <a class="button-link" href="{{ url_for('home_screen') }}">Home</a>
+    </div>
+  </header>
+
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <div class="flash">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% if not wallet %}
+      <div class="card">
+        <h2>Create a travel wallet</h2>
+        <form method="post" action="{{ url_for('travel_wallet_new') }}">
+          <label for="name">Trip name</label>
+          <input id="name" name="name" required placeholder="Japan 2025">
+
+          <label for="country_code">Country code</label>
+          <input id="country_code" name="country_code" maxlength="2" required placeholder="JP">
+
+          <label for="currency">Currency</label>
+          <input id="currency" name="currency" maxlength="3" required placeholder="JPY">
+
+          <label for="start_date">Start date</label>
+          <input id="start_date" name="start_date" type="date">
+
+          <label for="end_date">End date</label>
+          <input id="end_date" name="end_date" type="date">
+
+          <label for="soft_budget">Soft budget (optional)</label>
+          <input id="soft_budget" name="soft_budget" type="number" step="0.01" min="0">
+
+          <label for="hard_budget">Hard budget (optional)</label>
+          <input id="hard_budget" name="hard_budget" type="number" step="0.01" min="0">
+
+          <button type="submit">Create wallet</button>
+        </form>
+      </div>
+    {% else %}
+      <div class="card">
+        <h2>{{ wallet.name }}</h2>
+        <div>{{ wallet.country_code }} · {{ wallet.currency }}</div>
+        {% if wallet.start_date or wallet.end_date %}
+          <div>Dates: {{ wallet.start_date or '—' }} to {{ wallet.end_date or '—' }}</div>
+        {% endif %}
+        {% if wallet.soft_budget %}<div>Soft budget: {{ wallet.soft_budget }}</div>{% endif %}
+        {% if wallet.hard_budget %}<div>Hard budget: {{ wallet.hard_budget }}</div>{% endif %}
+      </div>
+
+      <div class="card">
+        <h3>Add transaction</h3>
+        <form method="post" action="{{ url_for('travel_wallet_add_tx', wallet_id=wallet.id) }}">
+          <label for="description">Description</label>
+          <input id="description" name="description" required>
+
+          <label for="category">Category</label>
+          <input id="category" name="category" placeholder="Food, Transport, ...">
+
+          <label for="amount_local">Amount (local currency)</label>
+          <input id="amount_local" name="amount_local" type="number" min="0" step="0.01" required>
+
+          <label for="currency_local">Currency</label>
+          <input id="currency_local" name="currency_local" maxlength="3" value="{{ wallet.currency }}">
+
+          <label><input type="checkbox" name="is_pre_trip"> Pre-trip expense</label>
+
+          <button type="submit">Add transaction</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Transactions</h3>
+        {% if transactions %}
+          {% for tx in transactions %}
+            <div class="tx">
+              <div><strong>{{ tx.description }}</strong> — {{ tx.amount_local }} {{ tx.currency_local }}</div>
+              <small>{{ 'Pre-trip' if tx.is_pre_trip else 'During trip' }} · Home value: {{ '%.2f'|format(tx.amount_home or 0) }} {{ tx.currency_home }}</small>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div>No transactions yet.</div>
+        {% endif %}
+      </div>
+
+      <div class="card">
+        <h3>Summary</h3>
+        <div class="summary-grid">
+          <div>Pre-trip spent: {{ '%.2f'|format(summary.total_pre_trip) }} {{ user.home_currency }}</div>
+          <div>During trip spent: {{ '%.2f'|format(summary.total_during_trip) }} {{ user.home_currency }}</div>
+          <div>Total: {{ '%.2f'|format(summary.total_spent) }} {{ user.home_currency }}</div>
+        </div>
+        {% if summary.category_totals %}
+          <h4>By category</h4>
+          <ul>
+            {% for cat, value in summary.category_totals.items() %}
+              <li>{{ cat }} — {{ '%.2f'|format(value) }} {{ user.home_currency }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      {% if guide %}
+        <div class="card guide">
+          <h3>{{ guide.title }}</h3>
+          <ul>
+            {% for tip in guide.tips %}
+              <li>{{ tip }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endif %}
+  </main>
+</body>
+</html>
