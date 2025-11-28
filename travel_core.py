@@ -117,8 +117,29 @@ TRAVEL_STATE: Dict[str, TravelModeState] = {}
 # ---------- Helper functions ----------
 
 def get_fx_rate(base: str, quote: str) -> Optional[float]:
-    if base in FX_RATES and quote in FX_RATES[base]:
-        return FX_RATES[base][quote]
+    """Lookup an FX rate, supporting direct and inverse pairs.
+
+    Falls back to ``1.0`` when the currencies match and attempts to compute the
+    reciprocal when only the inverse pair is stored. ``None`` is returned if no
+    usable rate is available.
+    """
+
+    if base == quote:
+        return 1.0
+
+    # Direct pair lookup
+    direct = FX_RATES.get(base, {}).get(quote)
+    if direct is not None:
+        return direct
+
+    # Inverse pair lookup (quote -> base)
+    inverse = FX_RATES.get(quote, {}).get(base)
+    if inverse:
+        try:
+            return 1 / inverse
+        except ZeroDivisionError:
+            return None
+
     return None
 
 
