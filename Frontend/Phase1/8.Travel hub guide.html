@@ -1,0 +1,253 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Spending Guide Mock</title>
+<style>
+  :root{
+    --bg:#f2f3f5;
+    --accent:#6dd36d;
+    --muted:#8f9396;
+    --card:#ffffff;
+    --shadow: 0 6px 18px rgba(18,20,20,0.12);
+    --glass: rgba(255,255,255,0.92);
+    --radius: 20px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter, Roboto, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial; background:var(--bg); color:#111}
+  /* phone frame center */
+  .phone{
+    width: 360px;
+    max-width:94vw;
+    margin:30px auto;
+    border-radius:18px;
+    border:8px solid #dcdfe2;
+    overflow:hidden;
+    background:#fff;
+    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  }
+
+  /* header image area */
+  .hero{
+    position:relative;
+    height:260px;
+    background: #333 url('https://images.unsplash.com/photo-1519183071298-a2962be90b44?auto=format&fit=crop&w=1200&q=60') center/cover no-repeat;
+    display:flex;
+    align-items:flex-start;
+    justify-content:flex-start;
+  }
+  /* top status + back */
+  .topbar{
+    position:absolute;
+    top:12px;
+    left:12px;
+    right:12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color:#fff;
+    font-size:13px;
+    pointer-events:none;
+  }
+  .back{
+    pointer-events:auto;
+    background:rgba(0,0,0,0.25);
+    width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  }
+  .back svg{fill:#d9f1da; width:18px;height:18px}
+
+  /* dark overlay for readability */
+  .hero::after{
+    content:"";
+    position:absolute;left:0;top:0;right:0;bottom:0;
+    background:linear-gradient(180deg, rgba(8,9,10,0.06) 40%, rgba(0,0,0,0.45) 100%);
+  }
+
+  /* circular center badge */
+  .badge{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    top:105px;
+    width:92px;height:92px;background:rgba(255,255,255,0.98);
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 14px rgba(0,0,0,0.18); z-index:6;
+  }
+  .badge .inner{
+    width:58px;height:58px;border-radius:50%;background:#ff5959;display:flex;align-items:center;justify-content:center;
+  }
+
+  .title{
+    position:absolute; left:50%; transform:translateX(-50%); top:170px; text-align:center; color:#fff; z-index:5;
+    font-weight:700; text-shadow:0 2px 6px rgba(0,0,0,0.4);
+  }
+  .title .small{font-weight:500; font-size:13px; opacity:0.95}
+  .title h1{margin:6px 0 0; font-size:34px; letter-spacing:1px}
+
+  /* sheet */
+  .sheet{
+    background:var(--card);
+    margin-top:-28px;
+    border-top-left-radius:24px;
+    border-top-right-radius:24px;
+    padding:22px;
+    box-shadow:var(--shadow);
+    position:relative;
+    z-index:4;
+  }
+
+  .available{
+    text-align:center;
+    padding:6px 12px 18px;
+  }
+  .available .label{color:var(--muted); font-size:13px}
+  .available .amount{font-size:44px; font-weight:800; margin:6px 0}
+  .available .rate{font-size:13px;color: #2f8b2f;font-weight:700}
+
+  /* three action buttons */
+  .actions{
+    display:flex;
+    justify-content:space-around;
+    gap:12px;
+    margin:16px 6px 22px;
+    align-items:center;
+  }
+  .action{
+    flex:1;
+    min-width:0;
+    text-align:center;
+  }
+  .circle{
+    width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;
+    background:linear-gradient(180deg, #e9f7ea, #dff3dc);
+    box-shadow:0 4px 8px rgba(36,150,36,0.08) inset;
+  }
+  .circle.large{width:64px;height:64px;background:var(--accent); color:#fff}
+  .action span{display:block;font-size:13px;color:#333}
+
+  hr.sep{border:none;border-top:1px solid #eee;margin:10px 0 12px}
+
+  /* info rows */
+  .row{
+    display:flex;gap:12px;align-items:flex-start;padding:10px 2px;
+  }
+  .icon-wrap{
+    width:44px;height:44px;border-radius:50%;background:#f7f7f8;border:1px solid #eee;display:flex;align-items:center;justify-content:center;
+  }
+  .row .title{font-weight:700; font-size:15px}
+  .row .desc{color:var(--muted); font-size:13px; margin-top:6px}
+
+  .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:8px 2px 20px}
+  .switch{
+    width:44px;height:24px;background:#e6e6e6;border-radius:14px;position:relative;
+  }
+  .switch .dot{position:absolute;left:4px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.12);transition:all .18s}
+  .switch.on{background:linear-gradient(90deg,#9be08f,#34c34a)}
+  .switch.on .dot{left:22px}
+
+  /* small footer handle */
+  .handle{height:6px;width:90px;background:#e9e9ea;border-radius:8px;margin:14px auto 10px;opacity:0.9}
+  /* responsiveness */
+  @media (max-width:420px){ .phone{width:94vw} .title h1{font-size:28px} .available .amount{font-size:36px} }
+</style>
+</head>
+<body>
+  <div class="phone" role="application" aria-label="Spending guide mock">
+    <div class="hero" aria-hidden="false">
+      <div class="topbar">
+        <div class="back" title="Back" aria-hidden="false">
+          <!-- back arrow svg -->
+          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </div>
+        <div style="opacity:.9;font-weight:600;font-size:13px">9:30</div>
+      </div>
+
+      <div class="badge" aria-hidden="true">
+        <div class="inner" title="record">
+          <!-- center red dot -->
+        </div>
+      </div>
+
+      <div class="title" aria-hidden="true">
+        <div class="small">Spending Guide</div>
+        <h1>JAPAN</h1>
+      </div>
+    </div>
+
+    <div class="sheet" role="region" aria-label="Spending details">
+      <div class="available">
+        <div class="label">Available to spend</div>
+        <div class="amount">0 JPY</div>
+        <div class="rate">1 EUR = 180,995 JPY</div>
+      </div>
+
+      <div class="actions" role="toolbar" aria-label="quick actions">
+        <div class="action">
+          <div class="circle" aria-hidden="true">
+            <!-- ATM icon placeholder -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#37a02c"><path d="M3 11h18v7H3z" opacity=".9"/></svg>
+          </div>
+          <span>Find ATM</span>
+        </div>
+
+        <div class="action">
+          <div class="circle large" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M11 11V6h2v5h5v2h-5v5h-2v-5H6v-2z"/></svg>
+          </div>
+          <span>Add money</span>
+        </div>
+
+        <div class="action">
+          <div class="circle" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#37a02c"><path d="M3 3h18v2H3zM3 19h18v2H3zM3 11h18v2H3z"/></svg>
+          </div>
+          <span>Check rates</span>
+        </div>
+      </div>
+
+      <hr class="sep" />
+
+      <div class="row">
+        <div class="icon-wrap" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#333"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="title">Carry cash</div>
+          <div class="desc">Small businesses, such as local markets and cafes, often only take cash.</div>
+        </div>
+      </div>
+
+      <div style="height:8px"></div>
+
+      <div class="toggle-row">
+        <div style="flex:1">
+          <div style="font-weight:700">Unable notifications</div>
+          <div style="color:var(--muted);font-size:13px;margin-top:6px">Unable notifications to receive currency tips and Spending guide</div>
+        </div>
+        <div style="margin-left:12px">
+          <div id="switch" class="switch" role="switch" aria-checked="false" tabindex="0">
+            <div class="dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="handle" aria-hidden="true"></div>
+    </div>
+  </div>
+
+<script>
+  // simple toggle behavior for the switch
+  const sw = document.getElementById('switch');
+  sw.addEventListener('click', ()=> {
+    sw.classList.toggle('on');
+    const on = sw.classList.contains('on');
+    sw.setAttribute('aria-checked', String(on));
+  });
+  sw.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sw.click(); }
+  });
+</script>
+</body>
+</html>

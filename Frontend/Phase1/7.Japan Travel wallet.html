@@ -1,0 +1,111 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Japan Travel Wallet</title>
+<style>
+  :root{
+    --bg:#f5f6f5; --card:#ffffff; --muted:#9aa0a6; --accent:#2d5b22;
+    --green:#b6f07a; --chip-border:#d7e6d0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  html,body{height:100%; margin:0; background:var(--bg); -webkit-font-smoothing:antialiased}
+  .frame{max-width:420px; margin:18px auto; background:var(--card); border-radius:18px; box-shadow:0 0 0 6px rgba(0,0,0,0.06); overflow:hidden; min-height:760px; position:relative;}
+  header{display:flex; align-items:center; gap:12px; padding:16px 18px; border-bottom:1px solid #eee;}
+  .circle-btn{width:40px;height:40px;border-radius:50%;background:#f0f1f0;display:flex;align-items:center;justify-content:center;font-weight:700;color:#333;box-shadow:inset 0 -1px 0 rgba(0,0,0,.02);}
+  header h1{font-size:18px;margin:0;font-weight:700}
+  .content{padding:14px 18px 110px;}
+  .search{background:#f0f1f0;padding:10px 14px;border-radius:20px;display:flex;gap:10px;align-items:center;color:#666;margin:12px 0}
+  .chips{display:flex;gap:10px;padding:8px 4px 12px;overflow:auto}
+  .chip{border-radius:18px;padding:8px 12px;border:1.5px solid var(--chip-border); font-size:13px;color:#24461a; background:transparent; white-space:nowrap;}
+  h2.section-title{font-size:18px;margin:20px 0 10px}
+  .list{background:transparent;border-top:1px solid #f0f0f0;padding-top:10px}
+  .item{display:flex;align-items:center;gap:14px;padding:12px 2px;border-bottom:1px solid #f3f3f3}
+  .avatar{width:44px;height:44px;border-radius:50%;background:#eef0ec;display:flex;align-items:center;justify-content:center;color:#47523a;font-weight:700}
+  .item-body{flex:1}
+  .name{font-weight:700;margin:0}
+  .meta{font-size:13px;color:var(--muted);margin-top:6px}
+  .amount{font-weight:800}
+  .card-tip{background:#e9efe8;border-radius:12px;padding:14px;display:flex;gap:12px;align-items:center;margin:18px 0}
+  .card-tip img{width:56px;height:56px;border-radius:10px;object-fit:cover}
+  .bottom-actions{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;width:92%;max-width:420px;padding:12px;display:flex;gap:12px;align-items:center;justify-content:space-between}
+  .btn{flex:1;padding:12px 14px;border-radius:28px;text-align:center;font-weight:700;border:0;cursor:pointer}
+  .btn.ghost{background:var(--accent);color:#fff}
+  .btn.green{background:linear-gradient(90deg,#b9f17a,#9de156);color:#042400}
+  /* small helpers */
+  .right{color:#000;font-weight:800;white-space:nowrap}
+  .small-add{color:#6ac463;font-weight:700;font-size:13px;float:right;margin-top:-6px}
+  @media (max-width:420px){
+    .frame{margin:8px}
+  }
+</style>
+</head>
+<body>
+  <div class="frame" role="main">
+    <header>
+      <div class="circle-btn">&larr;</div>
+      <h1>Japan 9.03.23-9.04.23</h1>
+      <div style="flex:1"></div>
+      <div class="circle-btn">⋮</div>
+    </header>
+
+    <div class="content">
+      <div class="search">🔍 <span style="opacity:.8">Search by country</span></div>
+
+      <div class="chips" aria-hidden="false">
+        <div class="chip">Includes hidden</div>
+        <div class="chip">Includes Travel Mode</div>
+        <div class="chip">Type</div>
+      </div>
+
+      <h2 class="section-title">Soft budget <span class="small-add">Add</span></h2>
+      <div class="list">
+        <div class="item">
+          <div class="avatar">+</div>
+          <div class="item-body">
+            <div class="name">Sarah Davies</div>
+            <div class="meta">Paid · Today</div>
+          </div>
+          <div class="right">100.00 JPY</div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Pre-trip expenses <span class="small-add">Add</span></h2>
+      <div class="list">
+        <div class="item">
+          <div class="avatar">↑</div>
+          <div class="item-body">
+            <div class="name">Booking.com</div>
+            <div class="meta">Paid · Today</div>
+          </div>
+          <div class="right">160.00 EUR</div>
+        </div>
+
+        <div class="item">
+          <div class="avatar">↑</div>
+          <div class="item-body">
+            <div class="name">Flight tickets</div>
+            <div class="meta">Paid · Today</div>
+          </div>
+          <div class="right">240.00 EUR</div>
+        </div>
+      </div>
+
+      <div class="card-tip" style="margin-top:20px">
+        <img src="https://via.placeholder.com/56" alt="" />
+        <div>
+          <div style="font-weight:700">Currency tips and<br/>Spending guide</div>
+          <div style="margin-top:8px;color:#2d8b27;font-weight:700">Enable</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-actions">
+      <button class="btn ghost">See summary</button>
+      <button class="btn green">Edit trip details</button>
+    </div>
+  </div>
+</body>
+</html>

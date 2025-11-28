@@ -1,0 +1,259 @@
+Recreated the mobile list UI using plain HTML and CSS. Paste into `index.html` and open in a browser.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Transaction List Mock</title>
+<style>
+  :root{
+    --bg:#f2f3f5;
+    --card:#ffffff;
+    --muted:#8b8f91;
+    --accent:#2e6b2f;
+    --pill-border:#d7e9d2;
+    --item-sep:#e9e9ea;
+    --avatar-bg:#eef0ef;
+    --shadow: 0 8px 24px rgba(19,19,19,0.06);
+    --radius:18px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#ececec);}
+  .phone {
+    width:390px;
+    max-width:94vw;
+    margin:28px auto;
+    border-radius:28px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+    border:6px solid rgba(0,0,0,0.03);
+    overflow:hidden;
+  }
+
+  /* top notch area / status */
+  .status {
+    height:28px;
+    background:transparent;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    padding:8px 14px;
+    color:var(--muted);
+    font-size:12px;
+  }
+
+  .app {
+    padding:14px 18px 8px;
+  }
+
+  .topbar {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+
+  .circle-btn {
+    width:42px;height:42px;border-radius:999px;background:#f3f3f3;display:grid;place-items:center;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,0.02);
+    cursor:pointer;
+  }
+
+  .top-icons {display:flex;gap:10px;align-items:center;}
+
+  /* search */
+  .search {
+    margin:12px 0;
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+
+  .search .input {
+    flex:1;
+    background:#f3f3f3;border-radius:999px;padding:12px 16px;display:flex;gap:10px;align-items:center;
+    color:#444;font-size:15px;
+  }
+  .search svg{opacity:0.6}
+
+  /* pills */
+  .pills {
+    display:flex;
+    gap:10px;
+    padding:8px 4px;
+    overflow:auto;
+    margin-bottom:6px;
+  }
+  .pill {
+    border:1.5px solid var(--pill-border);
+    color:#274a27;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:13px;
+    background:linear-gradient(180deg,#fbfff8,#f6fff2);
+    white-space:nowrap;
+  }
+
+  .divider {
+    height:1px;background:var(--item-sep);margin:12px 0;
+  }
+
+  .section-title { color:var(--muted); font-size:13px; margin:8px 2px; }
+
+  .list {
+    padding-bottom:18px;
+  }
+
+  .item {
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:16px 6px;
+    border-bottom:1px solid rgba(0,0,0,0.03);
+    margin:0 8px;
+  }
+
+  .avatar {
+    width:44px;height:44px;border-radius:999px;background:var(--avatar-bg);display:grid;place-items:center;
+    color:#2e2e2e;font-size:18px;
+    flex:0 0 44px;
+  }
+
+  .meta {
+    flex:1;
+  }
+  .name {
+    font-weight:700;color:#111;font-size:15px;margin-bottom:4px;
+  }
+  .sub {
+    color:var(--muted);font-size:13px;
+  }
+
+  .amount {
+    font-weight:700;color:#111;font-size:15px;
+    margin-left:8px;white-space:nowrap;
+  }
+
+  /* small screen adjustments */
+  @media (max-width:400px){
+    .phone{width:360px}
+    .circle-btn{width:40px;height:40px}
+  }
+
+  /* tiny helper icons styling */
+  svg.icon{width:18px;height:18px;display:block}
+  .avatar svg{width:20px;height:20px;opacity:0.9}
+</style>
+</head>
+<body>
+  <div class="phone" role="region" aria-label="mock phone">
+    <div class="status">9:30 &nbsp; ◦</div>
+
+    <div class="app">
+      <div class="topbar">
+        <div class="circle-btn" title="back">
+          <!-- left arrow -->
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </div>
+
+        <div style="flex:1"></div>
+
+        <div class="top-icons">
+          <div style="font-size:18px;color:#666">▤</div>
+        </div>
+      </div>
+
+      <div class="search">
+        <div class="input" role="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px">
+            <circle cx="11" cy="11" r="6"></circle><path d="M21 21l-4.35-4.35"></path>
+          </svg>
+          <span style="color:#7b7b7b">Search by country</span>
+        </div>
+      </div>
+
+      <div class="pills" aria-hidden="false">
+        <div class="pill">Includes hidden</div>
+        <div class="pill">Includes Travel Mode</div>
+        <div class="pill">Type</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">Today</div>
+
+      <div class="list">
+        <!-- Example item -->
+        <div class="item">
+          <div class="avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3b3b3b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 19V5" /><path d="M8 9l4-4 4 4"/>
+            </svg>
+          </div>
+          <div class="meta">
+            <div class="name">Sarah Davies</div>
+            <div class="sub">Paid · Today</div>
+          </div>
+          <div class="amount">50.00 PLN</div>
+        </div>
+
+        <div class="item">
+          <div class="avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3b3b3b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5v14" /><path d="M5 12h14"/>
+            </svg>
+          </div>
+          <div class="meta">
+            <div class="name">Sarah Davies</div>
+            <div class="sub">Paid · Today</div>
+          </div>
+          <div class="amount">50.00 PLN</div>
+        </div>
+
+        <div class="item">
+          <div class="avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3b3b3b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="7" width="18" height="12" rx="2"/><path d="M7 7V5h10v2"/>
+            </svg>
+          </div>
+          <div class="meta">
+            <div class="name">Sarah Davies</div>
+            <div class="sub">Paid · Today</div>
+          </div>
+          <div class="amount">50.00 PLN</div>
+        </div>
+
+        <!-- repeat more items to mimic list -->
+        <div class="item">
+          <div class="avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3b3b3b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 19V5" /><path d="M8 9l4-4 4 4"/>
+            </svg>
+          </div>
+          <div class="meta">
+            <div class="name">Sarah Davies</div>
+            <div class="sub">Paid · Today</div>
+          </div>
+          <div class="amount">50.00 PLN</div>
+        </div>
+
+        <div class="item">
+          <div class="avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3b3b3b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5v14" /><path d="M5 12h14"/>
+            </svg>
+          </div>
+          <div class="meta">
+            <div class="name">Sarah Davies</div>
+            <div class="sub">Paid · Today</div>
+          </div>
+          <div class="amount">50.00 PLN</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

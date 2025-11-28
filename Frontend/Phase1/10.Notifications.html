@@ -1,0 +1,193 @@
+Below is a compact single-file `index.html` that reproduces the visual: rounded mobile frame, header with back button, pill tabs (General selected), divider and list items with circular icons and chevrons. Paste into `index.html` and open in a browser.
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Notifications - Mock</title>
+<style>
+  :root{
+    --bg:#ffffff;
+    --muted:#f5f6f5;
+    --accent:#8fd63f; /* green pill */
+    --accent-strong:#6bb62a;
+    --text:#111;
+    --muted-text:#7a7a7a;
+    --border:#e6e6e6;
+    --phone-w:360px;
+  }
+
+  html,body{height:100%;margin:0;background:#efefef;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+  .phone {
+    width:var(--phone-w);
+    height:780px;
+    margin:28px auto;
+    background:var(--bg);
+    border-radius:20px;
+    border:6px solid #cfcfcf;
+    box-shadow:0 8px 30px rgba(0,0,0,0.08);
+    position:relative;
+    overflow:hidden;
+  }
+
+  /* top status bar notch */
+  .status {
+    height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 16px;
+    position:relative;
+  }
+  .notch {
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    top:8px;
+    width:14px;height:14px;
+    background:#111;border-radius:50%;
+    box-shadow:0 0 0 6px rgba(0,0,0,0.03);
+  }
+
+  .back {
+    width:40px;height:40px;border-radius:20px;
+    display:flex;align-items:center;justify-content:center;
+    background:#f1f3f1;border:1px solid #e9e9e9;
+    cursor:pointer;
+  }
+  .status-right { width:40px; height:40px; display:flex; align-items:center; justify-content:flex-end; opacity:0.6; font-size:12px; color:var(--muted-text); }
+
+  .content {
+    padding:18px 20px;
+  }
+
+  h1{
+    font-size:26px;margin:6px 0 14px;color:var(--text);font-weight:700;
+  }
+
+  /* tabs */
+  .tabs { display:flex; gap:12px; align-items:center; margin-bottom:18px; }
+  .pill{
+    padding:8px 14px;border-radius:999px;border:1.5px solid var(--border);
+    font-weight:600;font-size:14px;background:transparent;color:var(--text);
+  }
+  .pill.selected{
+    background:linear-gradient(180deg,var(--accent),var(--accent-strong));
+    color:#fff;border-color:transparent;box-shadow:0 1px 0 rgba(0,0,0,0.06) inset;
+  }
+
+  .sep { height:1px;background:var(--border);margin:6px 0 14px;border-radius:1px; }
+
+  /* list */
+  .list{ padding-top:8px; }
+  .item{
+    display:flex;align-items:center;gap:14px;padding:18px 6px;border-radius:8px;
+    transition:background .12s; align-items:flex-start;
+  }
+  .item + .item{ border-top:1px solid rgba(0,0,0,0.03); }
+  .icon{
+    width:44px;height:44px;border-radius:22px;background:#fbfbfb;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .text{flex:1;}
+  .title{ font-weight:700;color:var(--text); font-size:15px; margin-bottom:6px; }
+  .subtitle{ font-size:13px;color:var(--muted-text);line-height:1.3; }
+
+  .chev{
+    width:18px;height:18px; color:#8aa07a; align-self:center;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* small tweaks to match screenshot spacing */
+  .item .text { margin-top:2px; }
+
+  /* responsive: scale phone on larger screens */
+  @media (min-width:900px){
+    .phone{ transform:scale(1.05); }
+  }
+  @media (max-width:360px){
+    :root{ --phone-w:340px; }
+  }
+
+</style>
+</head>
+<body>
+  <div class="phone" role="application" aria-label="Notifications mock">
+    <div class="status">
+      <div class="back" title="Back" aria-hidden="true">
+        <!-- back arrow -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 6L9 12l6 6" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="notch" aria-hidden="true"></div>
+
+      <div class="status-right" aria-hidden="true">
+        <!-- simple battery/tri status -->
+        <svg width="28" height="10" viewBox="0 0 24 12" fill="none"><rect x="0" y="2" width="18" height="8" rx="2" stroke="#999" stroke-width="1.2"/><rect x="19.2" y="4" width="2" height="4" rx="0.6" fill="#999"/></svg>
+      </div>
+    </div>
+
+    <div class="content">
+      <h1>Notifications</h1>
+
+      <div class="tabs" role="tablist" aria-label="Notification tabs">
+        <button class="pill selected" role="tab" aria-selected="true">General</button>
+        <button class="pill" role="tab" aria-selected="false">Travel Mode</button>
+      </div>
+
+      <div class="sep" role="separator"></div>
+
+      <div class="list" role="list">
+        <div class="item" role="listitem">
+          <div class="icon" aria-hidden="true">
+            <!-- gear icon -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z" stroke="#6b6b6b" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M19.4 15a1.8 1.8 0 0 0 .3 1.9l.1.1a1 1 0 0 1-1.4 1.4l-.1-.1a1.8 1.8 0 0 0-1.9-.3 1.8 1.8 0 0 0-1.1 1.6V20a1 1 0 0 1-2 0v-.1a1.8 1.8 0 0 0-1.1-1.6 1.8 1.8 0 0 0-1.9.3l-.1.1A1 1 0 0 1 6.3 17.1l.1-.1a1.8 1.8 0 0 0 .3-1.9 1.8 1.8 0 0 0-1.6-1.1H4a1 1 0 0 1 0-2h.1a1.8 1.8 0 0 0 1.6-1.1 1.8 1.8 0 0 0-.3-1.9L5.3 7.1A1 1 0 0 1 6.7 5.7l.1.1a1.8 1.8 0 0 0 1.9.3h.1a1.8 1.8 0 0 0 1.1-1.6V4a1 1 0 0 1 2 0v.1c.1.7.6 1.3 1.1 1.6h.1a1.8 1.8 0 0 0 1.9-.3l.1-.1A1 1 0 0 1 17.7 6.3l-.1.1a1.8 1.8 0 0 0-.3 1.9c.2.7.8 1.1 1.6 1.1H20a1 1 0 0 1 0 2h-.1c-.8 0-1.4.4-1.6 1.1z" stroke="#6b6b6b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <div class="text">
+            <div class="title">Notifications</div>
+            <div class="subtitle">Choose which notifications you get and how you get them</div>
+          </div>
+
+          <div class="chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M9 6l6 6-6 6" stroke="#9fbf91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="item" role="listitem">
+          <div class="icon" aria-hidden="true">
+            <!-- trend icon -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M3 17l6-6 4 4 8-8" stroke="#6b6b6b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="21" cy="5" r="1.6" fill="#6b6b6b"/>
+            </svg>
+          </div>
+
+          <div class="text">
+            <div class="title">Exchange rate alerts</div>
+            <div class="subtitle">Get notified when a currency hits your chosen rate</div>
+          </div>
+
+          <div class="chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M9 6l6 6-6 6" stroke="#9fbf91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+```
