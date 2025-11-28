@@ -1,62 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Mobile Splash Mock</title>
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wise - Travel Money Made Simple</title>
     <style>
-      /* Splash-screen specific styling */
-      .screen--splash {
-        /* override any default .screen layout */
-        display:flex !important;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-        height:100%;
-        padding:16px;
-        background:linear-gradient(180deg,#aefc89,#8eea71);
-        box-sizing:border-box;
-      }
-      .screen--splash .logo {
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        width:100%;
-      }
-      .screen--splash .logo img {
-        max-width:70%;
-        height:auto;
-        display:block;
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #00b9ff 0%, #0066ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .splash-container {
+            text-align: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            background-color: white;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo img {
+            max-width: 120px;
+            max-height: 120px;
+        }
+
+        h1 {
+            color: white;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .loading {
+            margin-top: 40px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
-  <div class="mock-phone-wrap">
-    <div class="mock-phone" role="img" aria-label="Phone mockup">
-      <div class="status" aria-hidden="true">
-        <div class="left"><div class="time">9:30</div></div>
-        <div class="icons">
-            <span class="material-symbols-outlined">signal_cellular_2_bar</span>
-            <span class="material-symbols-outlined">network_wifi</span>
-            <span class="material-symbols-outlined">battery_3_bar</span>
+    <div class="splash-container">
+        <div class="logo">
+            <img src="/images/wise-logo.webp" alt="Wise Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<h1 style=\'color:#00b9ff;font-size:60px;margin:0\'>wise</h1>'">
         </div>
-      </div>
-
-      <div class="camera-wrap" aria-hidden="true">
-        <div class="camera"></div>
-      </div>
-
-      <main class="screen screen--splash" role="main" aria-label="Splash">
-        <div class="logo" aria-hidden="true">
-          <img src="../images/logo2.png" alt="Site Logo">
+        <h1>Wise</h1>
+        <p class="tagline">Travel Money Made Simple</p>
+        <div class="loading">
+            <div class="spinner"></div>
         </div>
-      </main>
-
-      <div class="gesture" aria-hidden="true"></div>
     </div>
-  </div>
+
+    <script>
+        // Redirect to login screen after 1 second
+        setTimeout(function() {
+            window.location.href = '/login';
+        }, 1000);
+    </script>
 </body>
 </html>
+
