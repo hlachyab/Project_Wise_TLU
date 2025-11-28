@@ -134,41 +134,5 @@
     <div class="gesture" aria-hidden="true"></div>
   </div>
 </div>
-
-<script>
-  // Minimal interactivity: toggle and live conversion example.
-  const toggle = document.getElementById('includeToggle');
-  toggle.addEventListener('click', ()=> {
-    toggle.classList.toggle('on');
-    const pressed = toggle.classList.contains('on');
-    toggle.setAttribute('aria-pressed', String(pressed));
-  });
-
-  const amount = document.getElementById('amount');
-  const balanceEl = document.getElementById('balance');
-  const localAmount = document.getElementById('localAmount');
-
-  // Example: update breakdown values when amount changes.
-  function update() {
-    const val = Math.max(0, parseFloat(amount.value) || 0);
-    const fee = 0.01;
-    const convert = Math.max(0, val - fee);
-    const rate = 100.983;
-    balanceEl.textContent = (17.00).toFixed(2) + ' EUR';
-    // if conversion field should respond to amount:
-    localAmount.value = Math.round(convert * rate);
-    // update breakdown text
-    document.getElementById('breakdown').querySelector('div').children[0].textContent = '− ' + fee.toFixed(2) + ' EUR Our fee';
-    document.getElementById('breakdown').querySelector('div').children[1].textContent = '= ' + convert.toFixed(2) + ' EUR Amount we’ll convert';
-    document.getElementById('breakdown').querySelector('div').children[2].textContent = '× ' + rate.toFixed(3) + ' Guaranteed rate';
-  }
-  amount.addEventListener('input', update);
-  update();
-
-  // create button simple feedback
-  document.getElementById('create').addEventListener('click', ()=> {
-    alert('Travel wallet created (demo).');
-  });
-</script>
 </body>
 </html>
