@@ -6,6 +6,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <title>Account</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <style>
     </style>
 </head>
@@ -13,10 +15,12 @@
 <div class="app" role="application" aria-label="Account screen">
     <div class="top">
         <img src="images/3d_avatar.svg" alt="User avatar" class="avatar-img" width="48" height="48">
-        <button class="btn">Earn 90 €</button>
+        <button class="chip-button-fill">Earn 90 €</button>
         <div class="top-right">
-            <button class="btn outline">Travel Mode</button>
-            <div class="icon-bell" aria-hidden="true">🔔</div>
+            <button class="chip-button-outline">Travel Mode</button>
+            <button class="icon-button" aria-hidden="true">
+                <img src="images/notification_bell.svg" alt="" width="18" height="18">
+            </button>
         </div>
     </div>
 
@@ -24,9 +28,9 @@
         <div class="title">Account</div>
 
         <div class="pills" role="tablist" aria-label="actions">
-            <button class="pill">Send</button>
-            <button class="pill strong">Add money</button>
-            <button class="pill">Request</button>
+            <button class="chip-button-fill">Send</button>
+            <button class="chip-button-dark">Add money</button>
+            <button class="chip-button-dark">Request</button>
         </div>
 
         <div class="cards" aria-hidden="false">
@@ -80,27 +84,27 @@
     <div class="bottom-nav" aria-hidden="false">
         <nav class="nav" role="navigation" aria-label="Bottom navigation">
             <div class="nav-item">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5L12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+                <span class="material-symbols-outlined">home</span>
                 <div>Home</div>
             </div>
 
             <div class="nav-item">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v14H3zM7 21v-4h10v4z"/></svg>
+                <span class="material-symbols-outlined">credit_card</span>
                 <div>Card</div>
             </div>
 
-            <div class="nav-item" aria-current="page">
-                <div class="fab" title="Send">↑</div>
-                <div style="font-weight:700;color:var(--green)">Send</div>
+            <div class="nav-item--highlight" aria-current="page">
+                <span class="material-symbols-outlined">north</span>
+                <div >Send</div>
             </div>
 
             <div class="nav-item">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zM3 21a8 8 0 0 1 16 0z"/></svg>
+                <span class="material-symbols-outlined">person</span>
                 <div>Recipients</div>
             </div>
 
             <div class="nav-item">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <span class="material-symbols-outlined">grid_view</span>
                 <div>Manage</div>
             </div>
         </nav>
