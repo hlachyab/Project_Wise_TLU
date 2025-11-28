@@ -76,6 +76,16 @@ body{
     gap:12px;
 }
 
+.topbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* or 'flex-start' since you have the flex:1 spacer */
+    gap: 8px;
+    padding: 12px 16px 0;
+    flex-wrap: nowrap;              /* prevent wrapping onto a second line */
+}
+
 .avatar{
     width:42px;height:42px;border-radius:50%;
     background:linear-gradient(180deg,#ffe9d6,#dbefff);
@@ -111,15 +121,17 @@ body{
     border: 0;
 }
 
+.title p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--sub);
+}
+
 /* content */
 .content{padding:18px 20px 90px;flex:1;overflow:auto}
 .title{font-size:28px;font-weight:700;margin:6px 0 14px}
 .pills{display:flex;gap:10px;margin-bottom:18px}
-.pill{
-    padding:8px 14px;border-radius:18px;background:#eafbdc;color:#0b3b00;font-weight:700;
-    font-size:14px;box-shadow:0 1px 0 rgba(0,0,0,0.02);cursor:pointer;border:none;
-}
-.pill.strong{background:var(--accent-dark);color:#fff;box-shadow:none}
 
 /* accounts cards row */
 .cards{display:flex;gap:12px;margin-bottom:22px}
@@ -330,6 +342,16 @@ body{
 .mock-phone .gesture{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);width:84px;height:6px;background:rgba(0,0,0,0.28);border-radius:6px;box-shadow:inset 0 -1px 0 rgba(255,255,255,0.06)}
 @media (max-width:420px){.mock-phone{transform:scale(0.92);} }
 
+.wallet-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 0;                 /* flat, like the reference */
+    background: transparent;          /* the row itself has no card background */
+    cursor: pointer;
+}
+
 
 /* CHIP BUTTON STYLE */
 /* Primary pill-style chip button */
@@ -435,4 +457,149 @@ body{
 .chip-btn-outline:focus-visible {
     outline: 2px solid #163300;
     outline-offset: 2px;
+}
+
+/* ICON BUTTON STYLE */
+.icon-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    width:40px;
+    height:40px;
+    border-radius:50%;              /* circular */
+    border:none;
+    cursor:pointer;
+
+    background:#edefeb;             /* subtle light grey fill */
+    color:#0E0F0C;                  /* dark icon color */
+
+    box-shadow:none;                /* very subtle / no shadow */
+    padding:0;
+}
+
+.icon-btn svg,
+.icon-btn .material-symbols-outlined{
+    width:22px;
+    height:22px;
+    font-size:22px;
+}
+
+.icon-btn:hover{
+    background:#e2e5e0;             /* slightly darker grey on hover */
+}
+
+.icon-btn:active{
+    background:#d7dad4;             /* a bit more contrast when pressed */
+    transform:translateY(1px);
+}
+
+.icon-btn:focus-visible{
+    outline:2px solid #bafc79;      /* light green focus ring */
+    outline-offset:2px;
+}
+
+.icon-btn-subtle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    width:40px;
+    height:40px;
+    border-radius:50%;              /* circular */
+    border:none;
+    cursor:pointer;
+
+    background:#edefeb;             /* subtle light grey fill */
+    color:#0E0F0C;                  /* dark icon color */
+
+    box-shadow:none;                /* very subtle / no shadow */
+    padding:0;
+}
+
+.icon-btn-subtle svg,
+.icon-btn-subtle .material-symbols-outlined{
+    width:22px;
+    height:22px;
+    font-size:22px;
+}
+
+.icon-btn-subtle:hover{
+    background:#e2e5e0;             /* slightly darker grey on hover */
+}
+
+.icon-btn-subtle:active{
+    background:#d7dad4;             /* a bit more contrast when pressed */
+    transform:translateY(1px);
+}
+
+.icon-btn-subtle:focus-visible{
+    outline:2px solid #bafc79;      /* light green focus ring */
+    outline-offset:2px;
+}
+
+/* SEARCH BAR (Travel mode screen) */
+.search{
+    padding:12px 16px 0;
+}
+
+.search-bar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 14px;
+    border-radius:22px;
+    background:#e5e7e3;              /* soft grey fill */
+    color:#4b4f48;
+    font-size:14px;
+}
+
+.search-bar svg{
+    flex:0 0 auto;
+}
+
+.search-bar span{
+    flex:1 1 auto;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.subtitle{
+  padding:12px 16px 4px;
+}
+
+/* Year filter chips row under "Current wallets" */
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:0 16px 8px;
+}
+
+.hr{
+  margin:0 16px 4px;
+  border-bottom:1px solid rgba(0,0,0,0.06);
+}
+
+.list{
+  padding-top:4px;
+}
+
+/* Wallet card text styles */
+.wallet-card .item-title{
+  font-weight:700;
+  font-size:14px;
+  color:#0E0F0C;
+}
+
+.wallet-card .item-sub{
+  font-weight:400;
+  font-size:13px;
+  color:var(--sub);
+}
+
+.wallet-card .item-right{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
 }

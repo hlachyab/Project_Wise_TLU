@@ -227,12 +227,40 @@ def create_wallet(user: User, name: str, country_code: str, currency: str,
     return wallet
 
 
-def add_wallet_transaction(user: User, wallet: TravelWallet, description: str,
-                           category: str, amount_local: float,
-                           currency_local: str, is_pre_trip: bool) -> WalletTransaction:
+def add_wallet_transaction(user, wallet, description, category,
+                           amount_local, currency_local, is_pre_trip):
+
+    # Convert to home currency
     rate_to_home = get_rate(currency_local, user.home_currency)
     amount_home = amount_local * rate_to_home
 
+    # -------- Deduct from main account --------
+    # If user has local currency account, deduct directly
+    if currency_local != user.home_currency:
+        acc = get_or_create_account(user, currency_local)
+        if acc.balance >= amount_local:
+            acc.balance -= amount_local
+        else:
+            # Not enough local balance → deduct via base currency
+            base_acc = get_or_create_account(user, user.home_currency)
+            if base_acc.balance >= amount_home:
+                base_acc.balance -= amount_home
+            else:
+                flash("Not enough balance in wallet or main account.")
+                return None
+    else:
+        # local currency == home currency
+        acc = get_or_create_account(user, user.home_currency)
+        if acc.balance >= amount_local:
+            acc.balance -= amount_local
+        else:
+            flash("Not enough balance.")
+            return None
+
+    # Commit account update now
+    db.session.commit()
+
+    # -------- Save transaction inside wallet --------
     tx = WalletTransaction(
         wallet_id=wallet.id,
         user_id=user.id,
@@ -244,9 +272,11 @@ def add_wallet_transaction(user: User, wallet: TravelWallet, description: str,
         currency_home=user.home_currency,
         is_pre_trip=is_pre_trip,
     )
+
     db.session.add(tx)
     db.session.commit()
     return tx
+
 
 
 def wallet_summary(wallet: TravelWallet, user: User):
@@ -300,7 +330,7 @@ TRAVEL_GUIDES = {
 @app.route("/")
 def splash():
     # Frontend/index.html = splash / landing
-    return render_template("index.html")
+    return render_template("Splash screen.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -338,7 +368,7 @@ def home_screen():
     travel_state = user.travel_state
 
     return render_template(
-        "home_screen.html",
+        "Home.html",
         user=user,
         accounts=accounts,
         travel_state=travel_state,
@@ -424,7 +454,7 @@ def travel_wallets_list():
     ).all()
 
     return render_template(
-        "travel_wallets.html",
+        "newstravelwallet.html",
         user=user,
         wallets=wallets,
     )
@@ -470,7 +500,7 @@ def travel_wallet_new():
         flash("Travel wallet created.")
         return redirect(url_for("travel_wallet_detail", wallet_id=wallet.id))
 
-    return render_template("travel_wallet_new.html", user=user)
+    return render_template("newtravelwallet.html", user=user)
 
 
 @app.route("/travel/wallets/<int:wallet_id>")
@@ -492,7 +522,7 @@ def travel_wallet_detail(wallet_id):
     guide = TRAVEL_GUIDES.get(wallet.country_code, None)
 
     return render_template(
-        "travel_wallet_detail.html",
+        "newtravelwallet.html",
         user=user,
         wallet=wallet,
         transactions=transactions,
